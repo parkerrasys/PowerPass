@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerPass - Grade Calculator</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <h1><i class="fas fa-chart-line"></i> PowerPass</h1>
+        <p>Grade Calculator & Analysis Tool</p>
+    </header>
+
+    <main>
+        <section class="input-section">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="upload">Upload Screenshot</button>
+                <button class="tab-btn" data-tab="manual">Manual Entry</button>
+            </div>
+
+            <div class="tab-content active" id="upload-tab">
+                <div class="upload-area" id="drop-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & drop your PowerSchool screenshot or click to upload</p>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                    <button id="uploadBtn" class="primary-btn">Choose File</button>
+                </div>
+                <div class="screenshot-tips">
+                    <p><i class="fas fa-info-circle"></i> For best results, upload a clear screenshot of your PowerSchool grades page showing assignment names and scores.</p>
+                </div>
+                <div id="uploadStatus"></div>
+                <div class="image-preview-container">
+                    <img id="imagePreview" alt="Preview" style="display: none;">
+                </div>
+                <button id="processImageBtn" class="primary-btn" disabled>Analyze Grades</button>
+            </div>
+
+            <div class="tab-content" id="manual-tab">
+                <div class="grades-container">
+                    <h2>Enter Your Grades</h2>
+                    <div class="grade-categories">
+                        <div class="category">
+                            <h3>Summative (70%)</h3>
+                            <div id="summativeGrades">
+                                <div class="grade-entry">
+                                    <input type="text" placeholder="Assignment Name" class="assignment-name">
+                                    <input type="number" placeholder="Score" class="score" min="0">
+                                    <input type="number" placeholder="Total" class="total" min="1">
+                                    <button class="remove-grade"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <button id="addSummative" class="add-grade-btn"><i class="fas fa-plus"></i> Add Summative</button>
+                        </div>
+
+                        <div class="category">
+                            <h3>Formative (30%)</h3>
+                            <div id="formativeGrades">
+                                <div class="grade-entry">
+                                    <input type="text" placeholder="Assignment Name" class="assignment-name">
+                                    <input type="number" placeholder="Score" class="score" min="0">
+                                    <input type="number" placeholder="Total" class="total" min="1">
+                                    <button class="remove-grade"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <button id="addFormative" class="add-grade-btn"><i class="fas fa-plus"></i> Add Formative</button>
+                        </div>
+                    </div>
+                    <button id="calculateManualBtn" class="primary-btn">Calculate Grade</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <h2>Grade Analysis</h2>
+            <div class="grade-summary">
+                <div class="grade-circle">
+                    <span id="finalGrade">--</span>
+                    <span class="grade-label">Current Grade</span>
+                </div>
+                <div class="grade-details">
+                    <p><strong>Summative:</strong> <span id="summativePercentage">--%</span></p>
+                    <p><strong>Formative:</strong> <span id="formativePercentage">--%</span></p>
+                </div>
+            </div>
+
+            <div class="recommendations">
+                <h3>Recommendations</h3>
+                <div id="recommendationsList"></div>
+            </div>
+
+            <div class="grade-breakdown">
+                <h3>Grade Breakdown</h3>
+                <div id="gradeBreakdown"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 PowerPass | Grade Calculator & Analysis Tool</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

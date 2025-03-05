@@ -253,8 +253,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function displayResults(grades) {
-    // Calculate summative percentage - correctly calculating percentage from each assignment then averaging
     let summativePercentage = 0;
+    let formativePercentage = 0;
+
+    // Calculate summative percentage
     if (grades.summative.length > 0) {
         let summativePercentageTotal = 0;
         grades.summative.forEach(grade => {
@@ -262,9 +264,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         summativePercentage = summativePercentageTotal / grades.summative.length;
     }
-    
-    // Calculate formative percentage - correctly calculating percentage from each assignment then averaging
-    let formativePercentage = 0;
+
+    // Calculate formative percentage
     if (grades.formative.length > 0) {
         let formativePercentageTotal = 0;
         grades.formative.forEach(grade => {
@@ -272,38 +273,41 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         formativePercentage = formativePercentageTotal / grades.formative.length;
     }
-    
-    // Calculate final grade (70% summative, 30% formative)
-    let finalGrade = (summativePercentage * 0.7) + (formativePercentage * 0.3);
-    
+
+    // Adjust final grade calculation when one category is missing
+    let finalGrade = 0;
+    if (grades.summative.length > 0 && grades.formative.length > 0) {
+        finalGrade = (summativePercentage * 0.7) + (formativePercentage * 0.3);
+    } else if (grades.summative.length > 0) {
+        finalGrade = summativePercentage; // 100% weight to summative if no formatives
+    } else if (grades.formative.length > 0) {
+        finalGrade = formativePercentage; // 100% weight to formative if no summatives
+    }
+
     // Round to nearest whole number
     finalGrade = Math.round(finalGrade);
-    
+
     // Update the UI
     document.getElementById('finalGrade').textContent = finalGrade;
     document.getElementById('summativePercentage').textContent = `${Math.round(summativePercentage)}%`;
     document.getElementById('formativePercentage').textContent = `${Math.round(formativePercentage)}%`;
-    
+
     // Generate recommendations
     generateRecommendations(grades, finalGrade);
-    
+
     // Show grade breakdown
     displayGradeBreakdown(grades);
-    
+
     // Show results section
     resultsSection.style.display = 'block';
-    
+
     // Scroll to results
     resultsSection.scrollIntoView({ behavior: 'smooth' });
 
     // Store current grades in window object for goal calculator and PDF export
     window.currentGradeData = {
-        summative: {
-            percentage: summativePercentage
-        },
-        formative: {
-            percentage: formativePercentage
-        },
+        summative: { percentage: summativePercentage },
+        formative: { percentage: formativePercentage },
         final: finalGrade,
         grades: grades
     };

@@ -130,15 +130,6 @@ h3 {
   color: var(--dark-gray);
 }
 
-.debug-notice {
-  max-width: 700px;
-  background-color: var(--light-red);
-  border-radius: 6px;
-  padding: 0.8rem;
-  margin: 1rem 0;
-  font-size: 0.9rem;
-}
-
 .screenshot-tips {
   background-color: var(--light-blue);
   border-radius: 6px;

@@ -156,7 +156,7 @@ h3 {
 }
 
 .primary-btn {
-  background-color: var(--secondary-blue);
+  background-color: var(--secondary-red);
   color: var(--white);
   border: none;
   padding: 0.8rem 1.5rem;
@@ -168,7 +168,7 @@ h3 {
 }
 
 .primary-btn:hover {
-  background-color: var(--primary-blue);
+  background-color: var(--primary-red);
 }
 
 .primary-btn:disabled {

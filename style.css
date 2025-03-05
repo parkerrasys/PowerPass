@@ -115,8 +115,8 @@ h3 {
 }
 
 .upload-area:hover {
-  border-color: var(--secondary-blue);
-  background-color: var(--light-blue);
+  border-color: var(--secondary-red);
+  background-color: var(--light-red);
 }
 
 .upload-area i {
